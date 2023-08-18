@@ -1,14 +1,14 @@
-Welcome to NewSoft.Framework
+Welcome to <b>NewSoft.Framework</b>
 
-Change to version 2.0.0.374
+Change to version <b>2.0.0.374</b><br><br>
 
-Add Module Registry.
+Add <b>Module Registry.</b><br>
 ** this module helps the manipulation of the system registry
 Go to the wiki to have all the explanations of the case and clear examples for different development languages
 
-Change to version 1.0.1
+Change to version <b>1.0.1</b><br>
 
-Add MicaEffect Module
-Add SysInfo Module
-Add Update Module
-Add Network Module
+Add <b>MicaEffect Module</b><br>
+Add <b>SysInfo Module</b><br>
+Add <b>Update Module</b><br>
+Add <b>Network Module</b><br>
