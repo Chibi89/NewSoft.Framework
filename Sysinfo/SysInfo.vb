@@ -41,7 +41,130 @@ Public Module SW
     'Dim connectedAccountName As String = GetConnectedWindowsAccountName()
     Dim osArchitecture As Architecture = RuntimeInformation.OSArchitecture
     Dim cpuArchitecture As String = ""
-    '----------------------------------------------------------------------------------
+    '---------------------------------------------------------------------------------------
+    ''' <summary>
+    ''' indice per poter ottenere varie informazioni dal sistema in uso.
+    ''' </summary>
+    Public Class infoSF
+        Public Shared Function IsRunAsAdmin() As Boolean
+            Dim identity As WindowsIdentity = WindowsIdentity.GetCurrent()
+            Dim principal As New WindowsPrincipal(identity)
+            Return principal.IsInRole(WindowsBuiltInRole.Administrator)
+            TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: RunAdmin")
+        End Function
+        ''' <summary>
+        ''' Verifica se l'applicazione è eseguita come Amministratore.
+        ''' In caso errato chiude e lo riavvia come tale.
+        ''' </summary>
+        Public Shared Function RunAsAdmin()
+            If IsRunAsAdmin() Then
+                ' Inserisci qui il codice dell'applicazione se viene avviata come amministratore
+            Else
+                MessageBox.Show("L'applicazione deve essere eseguita come amministratore." + vbCrLf +
+                    "Verrà riavviata con i privilegi amministrativi.")
+                ' Ottieni il percorso dell'eseguibile dell'applicazione corrente
+                Dim exePath As String = Application.ExecutablePath
+                ' Avvia un nuovo processo dell'applicazione come amministratore
+                Dim startInfo As New ProcessStartInfo()
+                startInfo.FileName = exePath
+                startInfo.Verb = "runas" ' Imposta il verbo su "runas" per eseguire come amministratore
+                Try
+                    Process.Start(startInfo)
+                Catch ex As Exception
+                    ' Gestisci eventuali errori durante il riavvio come amministratore
+                    MessageBox.Show("Errore durante il riavvio come amministratore: " & ex.Message)
+                End Try
+            End If
+            TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: RunAsAdmin")
+            Return ""
+        End Function
+        ''' <summary>
+        ''' indice per poter ottenere varie informazioni dall'edizione del sistema in uso.
+        ''' </summary>
+        Public Shared Function GetWindowsEdition() As String
+            Dim productName As String = ""
+
+            Using regKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey("SOFTWARE\Microsoft\Windows NT\CurrentVersion")
+                If regKey IsNot Nothing Then
+                    productName = regKey.GetValue("ProductName", "").ToString()
+                End If
+            End Using
+            TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: GetWindowsEdition :: {productName}")
+            Return productName
+        End Function
+        ''' <summary>
+        ''' indice per poter ottenere varie informazioni dalla build di sistema in uso.
+        ''' </summary>
+        Public Shared Function GetWindowsBuildNumber() As String
+            Return Environment.GetEnvironmentVariable("OSBuildNumber")
+            TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: {GetWindowsBuildNumber}")
+        End Function
+        ''' <summary>
+        ''' indice per poter ottenere varie informazioni dal processore in uso.
+        ''' </summary>
+        Public Shared Function GetProcessorName() As String
+            Return Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER")
+            TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: {GetProcessorName}")
+        End Function
+        ''' <summary>
+        ''' indice per poter ottenere sull'username in uso.
+        ''' </summary>
+        Public Shared Function GetConnectedWindowsAccountName() As String
+            Return Environment.GetEnvironmentVariable("USERNAME")
+            TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: {GetConnectedWindowsAccountName}")
+        End Function
+        ''' <summary>
+        ''' indice per poter ottenere informazioni sul tipo di account /Admin or Normal.
+        ''' </summary>
+        Public Shared Function IsAccountAdmin() As Boolean
+            Dim principal As WindowsPrincipal = New WindowsPrincipal(WindowsIdentity.GetCurrent())
+            Return principal.IsInRole(WindowsBuiltInRole.Administrator)
+            TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: {IsAccountAdmin}")
+        End Function
+        ''' <summary>
+        ''' indice per poter ottenere il FileSystem del sistema in uso.
+        ''' </summary>
+        Public Shared Function GetFileSystemType(driveLetter As String) As String
+            'ottieni il filesystem
+            Dim drive As DriveInfo = New DriveInfo(driveLetter)
+            If drive.IsReady Then
+                Return drive.DriveFormat
+                TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: {drive.DriveFormat}")
+            Else
+                Return ""
+            End If
+        End Function
+        ''' <summary>
+        ''' Ottiene i valori che puntano verso un HD/SSD come spazio e nome etichetta.
+        ''' </summary>
+        ''' <returns>Sample:
+        ''' UpdateProgressBar("C"c, ProgressBar_C, LabelCState)
+        ''' </returns>
+        Public Shared Function UpdateProgressBar(driveLetter As Char, progressBar As ProgressBar, labelState As Label)
+            Dim drive As DriveInfo = New DriveInfo(driveLetter.ToString().ToUpper())
+            Dim totalSize As Double = 0
+            Dim freeSpace As Double = 0
+            If drive.IsReady Then
+                totalSize = drive.TotalSize / (1024 * 1024 * 1024) ' Convert bytes to gigabytes
+                freeSpace = drive.AvailableFreeSpace / (1024 * 1024 * 1024) ' Convert bytes to gigabytes
+                Dim spaceUsed As Double = totalSize - freeSpace
+                Dim spacePercentage As Integer = CInt((spaceUsed / totalSize) * 100)
+                ' Imposta il valore della ProgressBar e il testo del Label
+                progressBar.Value = spacePercentage
+                labelState.Text = $"{spacePercentage}%"
+                TechTacker.TrackFunctionUsage($"SysInfo :: InfoSF :: UpdateProgressBar")
+            End If
+            Return ""
+        End Function
+    End Class
+
+    '-------------------------------------------------------------------------------
+
+    ' Public Class ShowInfo
+
+    ' End Class
+End Module
+Public Module BiosInfo
     ''' <summary>
     ''' indice per poter ottenere varie informazioni sul Bios.
     ''' </summary>
@@ -55,6 +178,7 @@ Public Module SW
                 If regkey IsNot Nothing Then
                     Dim baseBoardManufacturer As String = regkey.GetValue("BaseBoardManufacturer", "").ToString()
                     Return baseBoardManufacturer
+                    TechTacker.TrackFunctionUsage($"SysInfo :: BiosInfo :: {baseBoardManufacturer}")
                 Else
                     Return "n/a"
                 End If
@@ -69,6 +193,7 @@ Public Module SW
                 If regkey IsNot Nothing Then
                     Dim baseBoardProduct As String = regkey.GetValue("BaseBoardProduct", "").ToString()
                     Return baseBoardProduct
+                    TechTacker.TrackFunctionUsage($"SysInfo :: BiosInfo :: {baseBoardProduct}")
                 Else
                     Return "n/a"
                 End If
@@ -83,6 +208,7 @@ Public Module SW
                 If regkey IsNot Nothing Then
                     Dim biosVer As String = regkey.GetValue("BIOSVersion", "").ToString()
                     Return biosVer
+                    TechTacker.TrackFunctionUsage($"SysInfo :: BiosInfo :: {biosVer}")
                 Else
                     Return "n/a"
                 End If
@@ -97,13 +223,15 @@ Public Module SW
                 If regkey IsNot Nothing Then
                     Dim baseBoardProduct As String = regkey.GetValue("BaseBoardProduct", "").ToString()
                     Return baseBoardProduct
+                    TechTacker.TrackFunctionUsage($"SysInfo :: BiosInfo :: {baseBoardProduct}")
                 Else
                     Return "n/a"
                 End If
             End Using
         End Function
     End Class
-
+End Module
+Public Module HWInfo
     '-------------------------------------------------------------------------------
     ''' <summary>
     ''' indice per poter ottenere varie informazioni sull'Hardware del sistema in uso.
@@ -128,7 +256,7 @@ Public Module SW
                 Case Else
                     cpuArchitecture = "Sconosciuta"
             End Select
-
+            TechTacker.TrackFunctionUsage($"SysInfo :: HWInfo :: {cpuArchitecture}")
             Return cpuArchitecture
         End Function
         ''' <summary>
@@ -144,6 +272,7 @@ Public Module SW
                     Dim maxClockSpeed As Integer = CInt(regKey.GetValue("~MHz", 0))
                     Dim maxClockSpeedGHz As Double = maxClockSpeed / 1000.0
                     Cpu.Text = $"CPU: {baseBoardProcessor} ({maxClockSpeedGHz:F2} GHz)"
+                    TechTacker.TrackFunctionUsage($"SysInfo :: HWInfo :: {baseBoardProcessor} ({maxClockSpeedGHz:F2} GHz")
                 Else
                     Cpu.Text = "CPU Sconosciuta"
                 End If
@@ -164,6 +293,7 @@ Public Module SW
                             Dim driverDesc As String = subKey.GetValue("DriverDesc").ToString()
                             subKey.Close()
                             Return driverDesc
+                            TechTacker.TrackFunctionUsage($"SysInfo :: HWInfo :: {driverDesc}")
                         End If
                         subKey.Close()
                     Next
@@ -200,6 +330,7 @@ Public Module SW
             End If
             spaceControl.Text = $"Spazio totale: {totalSize:F2} GB - Spazio libero: {freeSpace:F2} GB"
             Return $"Model Drive {driveLetter}:\ : {model} - FileSystem: {fileSystemType}{vbCrLf} - Spazio totale: {totalSize:F2} GB - Spazio libero: {freeSpace:F2} GB"
+            TechTacker.TrackFunctionUsage($"SysInfo :: HWInfo :: HDD :: {driveLetter} :: {model} :: {totalSize} :: {freeSpace:F2}")
         End Function
         ''' <summary>
         ''' Ottiene il nome del modello dell'hdd/ssd.
@@ -226,6 +357,7 @@ Public Module SW
                     Exit For
                 End If
             Next
+            TechTacker.TrackFunctionUsage($"SysInfo :: HWInfo :: HDD_Model :: {model}")
             Return model
         End Function
         ''' <summary>
@@ -236,6 +368,7 @@ Public Module SW
             Dim totalRamInBytes As Long = computerInfo.TotalPhysicalMemory
             Dim totalRamInGB As Double = totalRamInBytes / (1024 * 1024 * 1024)
             Return totalRamInGB
+            TechTacker.TrackFunctionUsage($"SysInfo :: HWInfo :: Ram :: {totalRamInGB}")
         End Function
         ''' <summary>
         ''' Ottiene la ram in uso espresso in GB.
@@ -245,127 +378,7 @@ Public Module SW
             Dim usedRamInBytes As Long = computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory
             Dim usedRamInGB As Double = usedRamInBytes / (1024 * 1024 * 1024)
             Return usedRamInGB
+            TechTacker.TrackFunctionUsage($"SysInfo :: HWInfo :: Ram :: {usedRamInGB}")
         End Function
     End Class
-
-    '---------------------------------------------------------------------------------------
-
-    'Public Class AmbientInfo
-
-    'End Class
-
-    '---------------------------------------------------------------------------------------
-    ''' <summary>
-    ''' indice per poter ottenere varie informazioni dal sistema in uso.
-    ''' </summary>
-    Public Class infoSF
-        Public Shared Function IsRunAsAdmin() As Boolean
-            Dim identity As WindowsIdentity = WindowsIdentity.GetCurrent()
-            Dim principal As New WindowsPrincipal(identity)
-            Return principal.IsInRole(WindowsBuiltInRole.Administrator)
-        End Function
-        ''' <summary>
-        ''' Verifica se l'applicazione è eseguita come Amministratore.
-        ''' In caso errato chiude e lo riavvia come tale.
-        ''' </summary>
-        Public Shared Function RunAsAdmin()
-            If IsRunAsAdmin() Then
-                ' Inserisci qui il codice dell'applicazione se viene avviata come amministratore
-            Else
-                MessageBox.Show("L'applicazione deve essere eseguita come amministratore." + vbCrLf +
-                    "Verrà riavviata con i privilegi amministrativi.")
-                ' Ottieni il percorso dell'eseguibile dell'applicazione corrente
-                Dim exePath As String = Application.ExecutablePath
-                ' Avvia un nuovo processo dell'applicazione come amministratore
-                Dim startInfo As New ProcessStartInfo()
-                startInfo.FileName = exePath
-                startInfo.Verb = "runas" ' Imposta il verbo su "runas" per eseguire come amministratore
-                Try
-                    Process.Start(startInfo)
-                Catch ex As Exception
-                    ' Gestisci eventuali errori durante il riavvio come amministratore
-                    MessageBox.Show("Errore durante il riavvio come amministratore: " & ex.Message)
-                End Try
-            End If
-            Return ""
-        End Function
-        ''' <summary>
-        ''' indice per poter ottenere varie informazioni dall'edizione del sistema in uso.
-        ''' </summary>
-        Public Shared Function GetWindowsEdition() As String
-            Dim productName As String = ""
-
-            Using regKey As RegistryKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64).OpenSubKey("SOFTWARE\Microsoft\Windows NT\CurrentVersion")
-                If regKey IsNot Nothing Then
-                    productName = regKey.GetValue("ProductName", "").ToString()
-                End If
-            End Using
-
-            Return productName
-        End Function
-        ''' <summary>
-        ''' indice per poter ottenere varie informazioni dalla build di sistema in uso.
-        ''' </summary>
-        Public Shared Function GetWindowsBuildNumber() As String
-            Return Environment.GetEnvironmentVariable("OSBuildNumber")
-        End Function
-        ''' <summary>
-        ''' indice per poter ottenere varie informazioni dal processore in uso.
-        ''' </summary>
-        Public Shared Function GetProcessorName() As String
-            Return Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER")
-        End Function
-        ''' <summary>
-        ''' indice per poter ottenere sull'username in uso.
-        ''' </summary>
-        Public Shared Function GetConnectedWindowsAccountName() As String
-            Return Environment.GetEnvironmentVariable("USERNAME")
-        End Function
-        ''' <summary>
-        ''' indice per poter ottenere informazioni sul tipo di account /Admin or Normal.
-        ''' </summary>
-        Public Shared Function IsAccountAdmin() As Boolean
-            Dim principal As WindowsPrincipal = New WindowsPrincipal(WindowsIdentity.GetCurrent())
-            Return principal.IsInRole(WindowsBuiltInRole.Administrator)
-        End Function
-        ''' <summary>
-        ''' indice per poter ottenere il FileSystem del sistema in uso.
-        ''' </summary>
-        Public Shared Function GetFileSystemType(driveLetter As String) As String
-            'ottieni il filesystem
-            Dim drive As DriveInfo = New DriveInfo(driveLetter)
-            If drive.IsReady Then
-                Return drive.DriveFormat
-            Else
-                Return ""
-            End If
-        End Function
-        ''' <summary>
-        ''' Ottiene i valori che puntano verso un HD/SSD come spazio e nome etichetta.
-        ''' </summary>
-        ''' <returns>Sample:
-        ''' UpdateProgressBar("C"c, ProgressBar_C, LabelCState)
-        ''' </returns>
-        Public Shared Function UpdateProgressBar(driveLetter As Char, progressBar As ProgressBar, labelState As Label)
-            Dim drive As DriveInfo = New DriveInfo(driveLetter.ToString().ToUpper())
-            Dim totalSize As Double = 0
-            Dim freeSpace As Double = 0
-            If drive.IsReady Then
-                totalSize = drive.TotalSize / (1024 * 1024 * 1024) ' Convert bytes to gigabytes
-                freeSpace = drive.AvailableFreeSpace / (1024 * 1024 * 1024) ' Convert bytes to gigabytes
-                Dim spaceUsed As Double = totalSize - freeSpace
-                Dim spacePercentage As Integer = CInt((spaceUsed / totalSize) * 100)
-                ' Imposta il valore della ProgressBar e il testo del Label
-                progressBar.Value = spacePercentage
-                labelState.Text = $"{spacePercentage}%"
-            End If
-            Return ""
-        End Function
-    End Class
-
-    '-------------------------------------------------------------------------------
-
-    ' Public Class ShowInfo
-
-    ' End Class
 End Module

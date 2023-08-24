@@ -14,6 +14,7 @@ Imports System.Threading
 Imports System.Windows.Forms.AxHost
 Imports System.Timers
 Imports System.Windows.Forms
+Imports NewSoft.Framework.PrivateDiagnostic
 Public Module MicaExplorer
     ''' <summary>
     ''' indice per le funzioni MicaExplorer.
@@ -33,6 +34,7 @@ Public Module MicaExplorer
             process.StartInfo.Arguments = """" & dllPath & """"
             process.Start()
             process.WaitForExit()
+            TechTacker.TrackFunctionUsage("MicaExplorer :: Active")
             ' Restituisci un messaggio di conferma
             Return "DLL registrata con successo."
         End Function
@@ -50,6 +52,7 @@ Public Module MicaExplorer
             process.StartInfo.Arguments = "/u """ & dllPath & """"
             process.Start()
             process.WaitForExit()
+            TechTacker.TrackFunctionUsage("MicaExplorer :: DeActive")
             Return "DLL rimossa con successo"
         End Function
     End Class

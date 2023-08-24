@@ -13,6 +13,7 @@ Imports System.Reflection
 Imports System.Threading
 Imports System.Windows.Forms.AxHost
 Imports System.Timers
+Imports NewSoft.Framework.PrivateDiagnostic
 Imports System.Windows.Forms
 Public Module BGRExplorer
     ''' <summary>
@@ -33,6 +34,7 @@ Public Module BGRExplorer
             process.Start()
             process.WaitForExit()
             ' Restituisci un messaggio di conferma
+            TechTacker.TrackFunctionUsage("Background_Image_Explorer :: Active")
             Return "DLL registrata con successo."
         End Function
         ''' <summary>
@@ -49,6 +51,7 @@ Public Module BGRExplorer
             process.StartInfo.Arguments = "/u """ & dllPath & """"
             process.Start()
             process.WaitForExit()
+            TechTacker.TrackFunctionUsage("Background_Image_Explorer :: DeActive")
             Return "DLL rimossa con successo"
         End Function
     End Class

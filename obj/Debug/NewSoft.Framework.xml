@@ -1,0 +1,328 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+NewSoft.Framework
+</name>
+</assembly>
+<members>
+<member name="T:NewSoft.Framework.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:NewSoft.Framework.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:NewSoft.Framework.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:NewSoft.Framework.BGRExplorer.FunctionSet">
+ <summary>
+ indice per le funzioni di Background Explorer.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.BGRExplorer.FunctionSet.Active">
+ <summary>
+ indice per Attivare l'effetto.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.BGRExplorer.FunctionSet.DeActive">
+ <summary>
+ indice per disattivare l'effetto.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.PublicFunctions">
+ <summary>
+ indice per poter ottenere varie funzioni che facilitano lo sviluppo nell'ide.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.PublicFunctions.WinFormFunctionStyle.FormTitle(System.Windows.Forms.Form,System.String)">
+ <summary>
+ indice per poter settare il nome del form.
+ FormTitle(myForm, "Il mio form")
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.PublicFunctions.WinFormFunctionStyle.formSize(System.Windows.Forms.Form,System.Int32,System.Int32)">
+ <summary>
+ indice per poter settare le dimensioni del form.
+ FormSize(myForm, 800, 600)
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.PublicFunctions.WinFormFunctionStyle.formTransparencyKey(System.Windows.Forms.Form,System.Drawing.Color)">
+ <summary>
+ indice per poter settare il trasparancykey color.
+ FormTransparencyKey(myForm, Color.White)
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.PublicFunctions.WinFormFunctionStyle.formStartPositions(System.Windows.Forms.Form,System.String)">
+ <summary>
+ indice per poter settare lo start position.
+ FormStartPositions(myForm, "centerscreen")
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.PublicFunctions.WinFormFunctionStyle.formVisibleTopControl(System.Windows.Forms.Form,System.Boolean,System.Boolean)">
+ <summary>
+ indice per poter settare il maximizebox e il minimizebox del form.
+ FormVisibleTopControl(myForm, True, True)
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.PublicFunctions.WinFormFunctionStyle.formBorderStyle(System.Windows.Forms.Form,System.Windows.Forms.FormBorderStyle)">
+ <summary>
+ indice per poter settare la tipologia del bordo del form.
+ FormBorderStyle(myForm, FormBorderStyle.FixedSingle)
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.PublicFunctions.WinFormFunctionStyle.formBrgImage(System.Windows.Forms.Form,System.String,System.Windows.Forms.ImageLayout)">
+ <summary>
+ indice per poter l'immagine di sfondo e il relativo layout.
+ FormBrgImage(myForm, "path/to/image.jpg", ImageLayout.Stretch)
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.MicaLibrary.LoadMicaSet">
+ <summary>
+ Applica l'estensione del frame per l'effetto mica. 
+ Suggerimento: ApplyEffectAllForm(me or your form name,color.yourcolor)
+ <example>
+ <code>
+ ApplyEffectAllForm(me or your form name,color.yourcolor,0/1,0/4)
+ </code>
+ </example>
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.MicaExplorer.FunctionSet">
+ <summary>
+ indice per le funzioni MicaExplorer.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.MicaExplorer.FunctionSet.Active">
+ <summary>
+ indice per attivare l'effetto.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.MicaExplorer.FunctionSet.DeActive">
+ <summary>
+ indice per disattivare l'effetto.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Network">
+ <summary>
+ indice che ragruppa funzioni di networking
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Network.Webrequest">
+ <summary>
+ indice che ragruppa funzioni di networking
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.Network.Webrequest.GoNet(System.String,System.Windows.Forms.WebBrowser)">
+ <summary>
+ A seconda del parametro passato ricorre un'azione.
+ exsample:
+ Webrequest.GoNet("next", WebBrowser1)
+ Webrequest.GoNet("back", WebBrowser1)
+ Webrequest.GoNet("home", WebBrowser1)
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.Network.Webrequest.GoNet(System.Windows.Forms.TextBox,System.Windows.Forms.WebBrowser)">
+ <summary>
+ exsample: Webrequest.GoNet(textbox, WebBrowser1)
+ </summary>
+ <param name="textbox">definisce il controllo textbox da associare.</param>
+ <param name="webbrowser"> definisce il controllo web browser da associare.</param>
+ <returns>Una stringa che rappresenta l'architettura della CPU.</returns>
+</member>
+<member name="M:NewSoft.Framework.Network.Webrequest.GoNetPing(System.Windows.Forms.TextBox,System.Windows.Forms.Label)">
+ <summary>
+ Esegue il ping da url passato tramite parametro
+ exsample: Webrequest.GoNetPing(textbox, Label)
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.Network.Webrequest.NetAvailable">
+ <summary>
+ Esegue la verifica della connessione internet
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry">
+ <summary>
+ Ottiene l'indice per le funzioni collegate al registro di sistema
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry.RegistryFile">
+ <summary>
+ Ottiene la funzione per la registrazione di una librearia dll.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry.DeRegistryFile">
+ <summary>
+ Ottiene la funzione per la rimozione di una libreria dll.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry.VerifyFile">
+ <summary>
+ Ottiene la funzione per verificare l'esistenza di una chiave nel registro di sistema.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry.ReadFile">
+ <summary>
+ Ottiene la funzione per la lettura di una chiave/valore dal registro di sistema.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry.RenameValue">
+ <summary>
+ Ottiene la funzione per modificare una chiave/valore dal registro di sistema.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry.DeleteValue">
+ <summary>
+ Ottiene la funzione per l'eliminazione di una chiave/valore dal registro di sistema.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.Registry.CreateValue">
+ <summary>
+ Ottiene la funzione per la creazione di una chiave/valore nel registro di sistema.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.SW">
+ <summary>
+ indice per poter ottenere varie informazioni dal sistema in uso.
+ </summary>
+</member>
+<member name="T:NewSoft.Framework.SW.infoSF">
+ <summary>
+ indice per poter ottenere varie informazioni dal sistema in uso.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.RunAsAdmin">
+ <summary>
+ Verifica se l'applicazione è eseguita come Amministratore.
+ In caso errato chiude e lo riavvia come tale.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.GetWindowsEdition">
+ <summary>
+ indice per poter ottenere varie informazioni dall'edizione del sistema in uso.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.GetWindowsBuildNumber">
+ <summary>
+ indice per poter ottenere varie informazioni dalla build di sistema in uso.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.GetProcessorName">
+ <summary>
+ indice per poter ottenere varie informazioni dal processore in uso.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.GetConnectedWindowsAccountName">
+ <summary>
+ indice per poter ottenere sull'username in uso.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.IsAccountAdmin">
+ <summary>
+ indice per poter ottenere informazioni sul tipo di account /Admin or Normal.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.GetFileSystemType(System.String)">
+ <summary>
+ indice per poter ottenere il FileSystem del sistema in uso.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.SW.infoSF.UpdateProgressBar(System.Char,System.Windows.Forms.ProgressBar,System.Windows.Forms.Label)">
+ <summary>
+ Ottiene i valori che puntano verso un HD/SSD come spazio e nome etichetta.
+ </summary>
+ <returns>Sample:
+ UpdateProgressBar("C"c, ProgressBar_C, LabelCState)
+ </returns>
+</member>
+<member name="T:NewSoft.Framework.BiosInfo.BiosInfo">
+ <summary>
+ indice per poter ottenere varie informazioni sul Bios.
+ </summary>
+</member>
+<member name="F:NewSoft.Framework.BiosInfo.BiosInfo.subkeyBiosPath">
+ <summary>
+ Ottiene il nome del prodotto della scheda madre dal registro di sistema.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.BiosInfo.BiosInfo.BoardProduct">
+ <summary>
+ Ottiene il nome del prodotto della scheda madre dal registro di sistema.
+ </summary>
+ <returns>Restituisce il nome del prodotto della scheda madre o "n/a" se non disponibile.</returns>
+</member>
+<member name="M:NewSoft.Framework.BiosInfo.BiosInfo.BiosVersion">
+ <summary>
+ Ottiene il nome della versione del Bios in uso.
+ </summary>
+ <returns>Restituisce il nome della versione del bios o "n/a" se non disponibile.</returns>
+</member>
+<member name="M:NewSoft.Framework.BiosInfo.BiosInfo.BiosVendor">
+ <summary>
+ Ottiene il nome del produttore del bios.
+ </summary>
+ <returns>Restituisce il nome del produttore del bios o "n/a" se non disponibile.</returns>
+</member>
+<member name="T:NewSoft.Framework.HWInfo.infoHW">
+ <summary>
+ indice per poter ottenere varie informazioni sull'Hardware del sistema in uso.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.HWInfo.infoHW.GetCpuArchitecture">
+ <summary>
+ Restituisce una stringa che rappresenta l'architettura della CPU.
+ </summary>
+ <returns>Una stringa che rappresenta l'architettura della CPU.</returns>
+</member>
+<member name="M:NewSoft.Framework.HWInfo.infoHW.GetCpuInfo(System.Windows.Forms.Label)">
+ <summary>
+ Ottiene informazioni sulla CPU dal registro di sistema.
+ Sample: GetCpuInfo(nomelabel)
+ </summary>
+ <param name="Cpu">Il controllo Label in cui verranno visualizzate le informazioni sulla CPU.</param>
+</member>
+<member name="M:NewSoft.Framework.HWInfo.infoHW.GetGraphicsCardName">
+ <summary>
+ Ottiene il nome della scheda grafica.
+ </summary>
+ <returns>Restituisce il nome della scheda grafica o "n/a" se non disponibile.</returns>
+</member>
+<member name="M:NewSoft.Framework.HWInfo.infoHW.GetHardDiskInfo(System.IO.DriveInfo,System.String,System.Windows.Forms.Label,System.Windows.Forms.Label)">
+ <summary>
+ Ottiene il nome del produttore del bios.
+ </summary>
+ <returns>Sample:
+ Dim drive As DriveInfo = New DriveInfo("C")
+ Dim driveLetter As String = "C"
+ Dim labelControl As Label = C_Label ' Assumi che C_Label sia il nome del tuo controllo Label
+ Dim spaceControl As Label = C_Space ' Assumi che C_Space sia il nome del tuo controllo Label
+ Dim hardDiskInfo As String = GetHardDiskInfo(drive, driveLetter, labelControl, spaceControl)
+ </returns>
+</member>
+<member name="M:NewSoft.Framework.HWInfo.infoHW.GetHardDiskModel">
+ <summary>
+ Ottiene il nome del modello dell'hdd/ssd.
+ </summary>
+ <returns>Sample:
+ UpdateProgressBar("C"c, ProgressBar_C, LabelCState)
+ </returns>
+</member>
+<member name="M:NewSoft.Framework.HWInfo.infoHW.GetTotalRAM">
+ <summary>
+ Ottiene il totale della ram espresso in GB.
+ </summary>
+</member>
+<member name="M:NewSoft.Framework.HWInfo.infoHW.GetUsedRAM">
+ <summary>
+ Ottiene la ram in uso espresso in GB.
+ </summary>
+</member>
+</members>
+</doc>

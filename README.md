@@ -1,5 +1,10 @@
 Welcome to <b>NewSoft.Framework</b>
 
+Change to version <b>2.0.1.374</b><br><br>
+
+Add <b>Diagnostic Module</b><br>
+Add <b>PrivateDiagnostic Module<b> for counter use Lib<br>
+
 Change to version <b>2.0.0.374</b><br><br>
 
 Add <b>Module Registry.</b><br>

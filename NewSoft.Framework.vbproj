@@ -69,8 +69,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bgrexplorer\BGRExplorer.vb" />
-    <Compile Include="Controller\CwebBrowser.vb" />
-    <Compile Include="MicaEffect.vb" />
+    <Compile Include="Diagnostics\Diagnostcs.vb" />
+    <Compile Include="Diagnostics\PrivateDiagnostic.vb" />
+    <Compile Include="Function\Functions.vb" />
+    <Compile Include="MicaEffect\MicaEffect.vb" />
     <Compile Include="MicaExplorer\MicaExplorer.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -87,10 +89,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="network\Network.vb" />
-    <Compile Include="Registry.vb" />
+    <Compile Include="Network\Network.vb" />
+    <Compile Include="Registy\Registry.vb" />
     <Compile Include="Sysinfo\SysInfo.vb" />
-    <Compile Include="update.vb" />
+    <Compile Include="Update\update.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -110,7 +112,10 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="LICENSE.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
