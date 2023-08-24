@@ -1,5 +1,9 @@
 Welcome to <b>NewSoft.Framework</b>
 
+Change to versione <b>2.0.3.0</b><br><br>
+Add <b>Module Functions</b><br>
+<b>Fixed</b> a part of the tips view for the <b>Dev IDE component</b> while coding<br>
+
 Change to version <b>2.0.1.374</b><br><br>
 
 Add <b>Diagnostic Module</b><br>
