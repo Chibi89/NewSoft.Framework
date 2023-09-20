@@ -1,19 +1,26 @@
 Welcome to <b>NewSoft.Framework</b>
 
-Change to versione <b>2.0.3.0</b><br><br>
+## Change
+<details><summary>Change to version <b>2.0.3.0.1</b></summary>
+
+Add Function to SysInfo: GetBatteryInfo<br>
+Add Two Module: Interop and FunMath
+
+<details><summary>Change to versione <b>2.0.3.0</b></summary>
 Add <b>Module Functions</b><br>
 <b>Fixed</b> a part of the tips view for the <b>Dev IDE component</b> while coding<br>
 
-Change to version <b>2.0.1.374</b><br><br>
+<details><summary>Change to version <b>2.0.1.374</b></summary>
 
 Add <b>Diagnostic Module</b><br>
 Add <b>PrivateDiagnostic Module<b> for counter use Lib<br>
 
-Change to version <b>2.0.0.374</b><br><br>
+<details><summary>Change to version <b>2.0.0.374</b></summary>
 
 Add <b>Module Registry.</b><br>
 ** this module helps the manipulation of the system registry
 
+<details><summary>Change to version <b>1.0.1</b></summary>
 Change to version <b>1.0.1</b><br>
 
 Add <b>MicaEffect Module</b><br>
