@@ -5,6 +5,7 @@ Imports Microsoft.Win32
 Imports System.IO
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms
+Imports System.Drawing
 ''' <summary>
 ''' indice per poter ottenere varie informazioni dal sistema in uso.
 ''' </summary>
@@ -237,6 +238,46 @@ Public Module HWInfo
     ''' indice per poter ottenere varie informazioni sull'Hardware del sistema in uso.
     ''' </summary>
     Public Class infoHW
+        ''' <summary>
+        ''' indice per ottenere info sullo stato della batteria in uso
+        ''' Sample: GetBatteryInfo(customBatteryStatusText, customImage100, customImage70, customImage30, customImage20) or
+        ''' sample: GetBatteryInfo()
+        ''' </summary>
+        ''' <param name="customBatteryStatusText"></param>
+        ''' <param name="customImage100"></param>
+        ''' <param name="customImage70"></param>
+        ''' <param name="customImage30"></param>
+        ''' <param name="customImage20"></param>
+        ''' <returns></returns>
+        Public Shared Function GetBatteryInfo(Optional ByVal customBatteryStatusText As String = Nothing, Optional ByVal customImage100 As Image = Nothing, Optional ByVal customImage70 As Image = Nothing, Optional ByVal customImage30 As Image = Nothing, Optional ByVal customImage20 As Image = Nothing) As String
+            Dim batteryStatus As PowerStatus = SystemInformation.PowerStatus
+
+            ' Stato della batteria personalizzato o predefinito
+            Dim batteryStatusText As String = If(String.IsNullOrEmpty(customBatteryStatusText), GetDefaultBatteryStatusText(batteryStatus), customBatteryStatusText)
+
+            ' Percentuale della batteria
+            Dim batteryPercent As Integer = CInt(batteryStatus.BatteryLifePercent * 100)
+
+            ' Creare una stringa con le informazioni
+            Dim batteryInfo As String = "Stato della batteria: " & batteryStatusText & vbCrLf &
+                                    "Percentuale della batteria: " & batteryPercent & "%"
+            Return batteryInfo
+        End Function
+        Private Shared Function GetDefaultBatteryStatusText(ByVal batteryStatus As PowerStatus) As String
+            ' Stato della batteria predefinito
+            Select Case batteryStatus.BatteryChargeStatus
+                Case BatteryChargeStatus.Charging
+                    Return "In carica"
+                Case BatteryChargeStatus.Low
+                    Return "In scarica"
+                Case BatteryChargeStatus.High
+                    Return "Carica completa"
+                Case BatteryChargeStatus.Unknown
+                    Return "Non in carica"
+                Case Else
+                    Return "Sconosciuto"
+            End Select
+        End Function
         ''' <summary>
         ''' Restituisce una stringa che rappresenta l'architettura della CPU.
         ''' </summary>
