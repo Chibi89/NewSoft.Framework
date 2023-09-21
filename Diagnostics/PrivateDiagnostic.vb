@@ -1,4 +1,5 @@
-﻿Imports System.Net
+'@2023 Newspoint Software
+Imports System.Net
 
 Module PrivateDiagnostic
     Public Class TechTacker
