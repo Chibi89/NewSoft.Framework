@@ -1,7 +1,7 @@
 Welcome to <b>NewSoft.Framework</b>
 
 ## Change
-<details><summary>Change to version <b>2.0.4.0.(Revision and start new function for next version)</b></summary>
+<details><summary>Change to version <b>2.0.4.0.</b></summary>
 
 Coming Soon
 </details>
