@@ -1,6 +1,11 @@
 Welcome to <b>NewSoft.Framework</b>
 
 ## Change
+<details><summary>Change to version <b>2.0.4.0.(Revision and start new function for next version)</b></summary>
+
+Coming Soon
+</details>
+
 <details><summary>Change to version <b>2.0.3.0.(Revision and start new function for next version)</b></summary>
 
 Add Function to SysInfo: GetBatteryInfo<br>
