@@ -30,7 +30,7 @@ Public Module BGRExplorer
             ' Registra la DLL utilizzando regsvr32
             Dim process As New Process()
             process.StartInfo.FileName = "regsvr32"
-            process.StartInfo.Arguments = """" & dllPath & """"
+            process.StartInfo.Arguments = "/s """ & dllPath & """"
             process.Start()
             process.WaitForExit()
             ' Restituisci un messaggio di conferma
@@ -48,7 +48,7 @@ Public Module BGRExplorer
             ' Rimuove la registrazione della DLL utilizzando regsvr32
             Dim process As New Process()
             process.StartInfo.FileName = "regsvr32"
-            process.StartInfo.Arguments = "/u """ & dllPath & """"
+            process.StartInfo.Arguments = "/s /u """ & dllPath & """"
             process.Start()
             process.WaitForExit()
             TechTacker.TrackFunctionUsage("Background_Image_Explorer :: DeActive")
