@@ -1,5 +1,6 @@
-﻿'@2023 Newspoint Software
+'@2023 Newspoint Software
 Imports System
+Imports NewSoft.Framework.PrivateDiagnostic
 Imports System.Text.RegularExpressions
 
 Public Module MathFunc
@@ -73,6 +74,6 @@ Public Module MathFunc
 
             ' Restituisci il risultato
             Return result
+            TechTacker.TrackFunctionUsage("Math Function Usage")
         End Function
     End Class
-End Module
