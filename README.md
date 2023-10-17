@@ -4,6 +4,12 @@ Welcome to <b>NewSoft.Framework</b>
 <details><summary>Change to version <b>2.0.4.0.</b></summary>
   <br>
 Add Sector Link to <b>PrivateDiagnostic</b> for other module
+Made some parameters of these modules optional
+  *Functional
+  *Diagnostic
+  *SysInfo
+  *Math
+  And more module
 </details>
 
 <details><summary>Change to version <b>2.0.3.0.(Revision and start new function for next version)</b></summary>
