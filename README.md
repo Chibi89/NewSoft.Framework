@@ -3,7 +3,7 @@ Welcome to <b>NewSoft.Framework</b>
 ## Change
 <details><summary>Change to version <b>2.0.4.0.</b></summary>
   <br>
-Add Sector Link to <b>PrivateDiagnostic</b> for other module
+Add Sector Link to <b>PrivateDiagnostic</b> for other module<br>
 Made some parameters of these modules optional<br>
   *Functional<br>
   *Diagnostic<br>
